@@ -22,7 +22,7 @@ class mainwindow{
         int h;
         int w;
     public:
-        enum layer{bg=0, boxes=1, eneys=2, bullets=3, player=4, __count=5};
+        enum layer{bg=0, boxes=1, powerups=2, player=3, __count=4};
         mainwindow(std::string bgpath, int h, int w, int bbp=32);
         void render();
         void addLay(gfxobject* obj, const layer lay){layers[lay].data().push_back(obj);}
