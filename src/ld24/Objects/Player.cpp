@@ -1,4 +1,5 @@
 #include "Player.hpp"
+#include <ld24/Objects/Powerup.hpp>
 #include <SDL/SDL.h>
 
 namespace ld24{
@@ -27,10 +28,10 @@ void Player::update(int ticks){
         yspeed+=-1*jumpspeed*ticks/1000.;
     }
     if( keystates[ SDLK_LEFT ] ){
-        xspeed =-1*movespeed*ticks/1000.;
+        xspeed =-1*(movespeed+up_walkspeed)*ticks/1000.;
         chCount+=ticks;
     }else if( keystates[ SDLK_RIGHT ] ){
-        xspeed = movespeed*ticks/1000.;
+        xspeed = (movespeed+up_walkspeed)*ticks/1000.;
         chCount+=ticks;
     }else{
         xspeed=0;
@@ -69,6 +70,7 @@ void Player::update(int ticks){
         imgIndex++;
         imgIndex=imgIndex%images.size();
     }
+    checkPowerups();
 }
 
 bool Player::udChk(int ticks){
@@ -88,12 +90,22 @@ bool Player::rlChk(int ticks){
     auto img=images[imgIndex];
     float nx=xx+xspeed*ticks/1000.;
     for(auto &&box:obstacles){
-        if(boxCollide({{int(nx+0.5),int(xy)},img.w(), img.h()}, box)){
+        if(boxCollide({{int(nx+0.5),int(xy+0.5)},img.w(), img.h()}, box)){
             return true;
         }
             
     }
     return false;
+}
+
+void Player::checkPowerups(){
+    auto img=images[imgIndex];
+    powerups.realDelete();
+    for(auto i : powerups.data()){
+        if(boxCollide({{x,y},img.w(), img.h()}, i->getInfo())){
+            i->Use()(this);
+        }
+    }
 }
 
 

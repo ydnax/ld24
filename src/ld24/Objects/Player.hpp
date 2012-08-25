@@ -20,19 +20,23 @@ private:
     float xspeed, yspeed;
     std::array<Image, 3> images;
     GfxRegister r;
+    boxcont obstacles;
+    int imgIndex=0;
+    const int animationSpeed=100;
+    int chCount=0;
+    bool canjump=false;
+
     const int gravity=100;
     const int jumpspeed=4000;
     const int movespeed=1200;
     const float maxdown=4000;
     bool udChk(int ticks);
     bool rlChk(int ticks);
-    bool canjump=false;
-    boxcont obstacles;
-
-
-    int imgIndex=0;
-    const int animationSpeed=100;
-    int chCount=0;
+    
+    void checkPowerups();
+public:
+    bool up_canjump=false;
+    int  up_walkspeed=0;
 public:
     Player(Level *lvl, int x, int y);
     bool exit();
