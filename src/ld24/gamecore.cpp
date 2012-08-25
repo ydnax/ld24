@@ -27,7 +27,7 @@ R"LVL(ssssssssss
 ssssssssss
 sssssss
 ssssssss
-ssssssssss
+ssssswssss
 wwwwwwwwww)LVL";
     auto li=ll.parseLevel(lstr);
     auto limg=get<1>(li);
@@ -35,11 +35,13 @@ wwwwwwwwww)LVL";
     Level level([](){return false;});
     timer.start();
     Player player{&level, 50,50};
+    player.setObstacles(get<0>(li));
     while(! player.exit()){
         window->render();
         level.update(timer.get_dticks());
-        std::chrono::milliseconds dura( 33 );
-        std::this_thread::sleep_for( dura );
+        
+        std::chrono::milliseconds dura( 30 );
+        std::this_thread::sleep_for( dura );//*/
     }
     std::cout<<"all levels played. game over"<<std::endl;
 }

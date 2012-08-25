@@ -14,7 +14,6 @@ struct objinfo{
     int h;
 };
 bool boxCollide(const objinfo &A, const objinfo &B);
-
 bool boxInsideBox(const objinfo &area, const objinfo &obj);
 bool boxOutsideBox(const objinfo &area, const objinfo &obj);
 }
