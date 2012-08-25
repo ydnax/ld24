@@ -6,8 +6,8 @@ using namespace picppgl;
 LevelLoader::LevelLoader():
         row(0), column(0), maxlength(-1),
         levelmap(0,50),
-        sky(0,0), 
-        wall(0,0){}
+        sky("resources/gfx/sky.png", 50,50), 
+        wall("resources/gfx/wall.png",50,50){}
 
 
 LevelLoader::lvlInfo LevelLoader::parseLevel(string data){
