@@ -5,10 +5,13 @@
 #include <thread>
 #include <pic-gl/Ui/main_window.hpp>
 #include <pic-gl/Gameflow/Level.hpp>
+#include <ld24/LevelLoader.hpp>
+#include <ld24/Objects/Player.hpp>
 #include "gamecore.hpp"
 
 
 using namespace std;
+using namespace ld24;
 namespace picppgl{
 //using namespace ld24;
 gamecore::gamecore(){
@@ -17,9 +20,22 @@ gamecore::gamecore(){
 }
     
 void gamecore::gameloop(){
+
+    auto ll=LevelLoader{};
+string lstr=
+R"LVL(ssssssssss
+ssssssssss
+sssssss
+ssssssss
+ssssssssss
+wwwwwwwwww)LVL";
+    auto li=ll.parseLevel(lstr);
+    auto limg=get<1>(li);
+    window->setBackground(limg);
     Level level([](){return false;});
     timer.start();
-    while(true){
+    Player player{&level, 50,50};
+    while(! player.exit()){
         window->render();
         level.update(timer.get_dticks());
         std::chrono::milliseconds dura( 33 );

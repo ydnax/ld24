@@ -4,7 +4,8 @@
 #include <vector>
 #include <functional>
 #include <pic-gl/Util/lazy_delete_vector.hpp>
-#include <iostream>
+#include <pic-gl/Util/tools.hpp>
+
 using std::string;
 namespace picppgl{
 class Level;
@@ -16,6 +17,7 @@ public:
 private:
     lazyDeleteVector<levelObject*> objects;
     winCondition winfun;
+    point screencenter;
 public:
     Level(winCondition wc):winfun(wc){}
     void setWinFun(winCondition wc){winfun=wc;}
@@ -23,6 +25,8 @@ public:
     void addObj(levelObject*);
     void delObj(levelObject*);
     bool hasWon();
+    void screenCenter(point nval){screencenter=nval;}
+    point screenCenter()const{return screencenter;}
     ~Level();
 };
 class levelObject{

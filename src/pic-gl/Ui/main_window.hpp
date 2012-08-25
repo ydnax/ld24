@@ -27,6 +27,7 @@ class mainwindow{
         void render();
         void addLay(gfxobject* obj, const layer lay){layers[lay].data().push_back(obj);}
         void remLay(gfxobject* obj, const layer lay);
+        void setBackground(Image newimg){background=newimg;}
         winInfo getInfo()const{return {h,w};}
 };
 extern mainwindow *mwindow;
