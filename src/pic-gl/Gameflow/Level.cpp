@@ -2,6 +2,9 @@
 namespace picppgl{
 
 void Level::update(int ticks){
+    for(auto &&f:gcFuns)
+        f();
+    gcFuns.clear();
     objects.realDelete();
     for(auto &&obj: objects.data()){
         obj->update(ticks);

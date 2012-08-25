@@ -14,14 +14,17 @@ class levelObject;
 class Level{
 public:
     typedef std::function<bool()> winCondition;
+    typedef std::function<void()> gcFun;
 private:
     lazyDeleteVector<levelObject*> objects;
     winCondition winfun;
     point screencenter;
+    std::vector<gcFun> gcFuns;
 public:
     Level(winCondition wc):winfun(wc){}
     void setWinFun(winCondition wc){winfun=wc;}
     void update(int);
+    void addGcFun(gcFun f){gcFuns.push_back(f);}
     void addObj(levelObject*);
     void delObj(levelObject*);
     bool hasWon();
@@ -30,7 +33,7 @@ public:
     ~Level();
 };
 class levelObject{
-private:
+protected:
     Level* lvl;
 public:
     levelObject(Level *l):lvl(l){
