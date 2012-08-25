@@ -7,6 +7,7 @@
 #include <pic-gl/Gameflow/Level.hpp>
 #include <ld24/LevelLoader.hpp>
 #include <ld24/Objects/Player.hpp>
+#include <ld24/Objects/Powerup.hpp>
 #include "gamecore.hpp"
 
 
@@ -36,6 +37,7 @@ wwwwwwwwww)LVL";
     timer.start();
     Player player{&level, 50,50};
     player.setObstacles(get<0>(li));
+    new Powerup{&level, 200, 100, [](Player *pl){pl->up_walkspeed+=5000;} };
     while(! player.exit()){
         window->render();
         level.update(timer.get_dticks());

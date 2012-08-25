@@ -6,8 +6,8 @@ env.Append(  CXXFLAGS = "-stdlib=libc++ -fcolor-diagnostics")
 env.Append(  CCFLAGS  = '-pedantic -Wall -Wextra -Werror -std=c++11 -ferror-limit=2' )
 env.Append(  LIBS     = ['c++','SDL', 'SDL_image', 'SDL_gfx', 'SDL_mixer', 'SDL_ttf',] )
 env.Append(  CPPPATH  = 'build' )
-debug = ARGUMENTS.get('debug', 0)
-if int(debug)==1:
+debug = int(ARGUMENTS.get('debug', 0))
+if debug==1:
     env.SetOption('num_jobs', 1)
     env.Append(LINKFLAGS = '-faddress-sanitizer ')
     env.Append(CCFLAGS   = '-faddress-sanitizer -fcatch-undefined-behavior -g -ggdb -O0')  
