@@ -1,5 +1,5 @@
 #ifndef ld24_objects_player_hpp
-#define ld24_player_hpp
+#define ld24_objects_player_hpp
 #include <array>
 #include <iostream>
 #include <array>
