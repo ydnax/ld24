@@ -17,6 +17,8 @@ LevelLoader::LevelLoader(Level *lvl, string data):
             default:error();break;
         }
     }
+    cerr<<"W:  "<<maxwidth<<endl;
+    mwindow->setWorldSizeW(maxwidth);
 }
 void LevelLoader::draw(Image& target){
     for(auto &&el:tiles){
@@ -30,13 +32,14 @@ void LevelLoader::newline(){
 }
 
 void LevelLoader::skytile(){
-    //tiles.push_back({sky, column*tilelength, row*tilelength});
     column++;
 }
 
 void LevelLoader::walltile(){
     obstacles.push_back({{column*tilelength, row*tilelength}, tilelength, tilelength});
     tiles.push_back({wall, column*tilelength, row*tilelength});
+    auto w=column*tilelength+tilelength;
+    maxwidth=w>maxwidth?w:maxwidth;
     column++;
 }
 

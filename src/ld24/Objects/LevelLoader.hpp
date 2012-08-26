@@ -27,6 +27,7 @@ private:
     int row, column;
     picppgl::Image sky, wall;
     const int tilelength=50;
+    int maxwidth=1;
     void newline();
     void skytile();
     void walltile();
