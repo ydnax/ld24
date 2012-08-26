@@ -8,7 +8,7 @@ namespace picppgl{
 
 mainwindow::mainwindow(std::string bgpath, int w, int h, int bbp):
         vsurface_(reinterpret_cast<ImageData*>(SDL_SetVideoMode(w, h, bbp, SDL_SWSURFACE ))),
-        background( bgpath ),
+        background( bgpath, w, h),
         layers(layer::__count),
         h(h), w(w){
     SDL_Init( SDL_INIT_EVERYTHING );
