@@ -43,6 +43,13 @@ wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww)LVL";
         images.emplace_back(Image(s.str(), 50, 50));
     }
     new Powerup{&level, 200, 180, images, [](Player *pl){pl->up_canjump=true;} };
+    images.clear();
+    for (int i = 0; i < 24; ++i){
+        stringstream s;
+        s<<"resources/gfx/powerups/faster-anim"<<i<<".png";
+        images.emplace_back(Image(s.str(), 50, 50));
+    }
+    new Powerup{&level, 400, 180, images, [](Player *pl){pl->up_walkspeed+=50;} };
     while(! player.exit()){
         window->render();
         level.update(timer.get_dticks());
