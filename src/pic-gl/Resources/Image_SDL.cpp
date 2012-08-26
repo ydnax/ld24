@@ -127,6 +127,17 @@ void Image::apply(Image &what, int x, int y){
         &offset ); 
 }
 
+Image Image::Copy(int x, int y, int w, int h){
+    SDL_Rect r;
+    r.x=x;
+    r.y=y;
+    r.w=w;
+    r.h=h;
+    SDL_Surface* tgt=reinterpret_cast<SDL_Surface*>(sdl_util::create_blank_surface(w,h));
+    SDL_BlitSurface(reinterpret_cast<SDL_Surface*>(data), &r, tgt, NULL);
+    return Image(reinterpret_cast<ImageData*>(tgt));
+}
+
 int Image::w()const{
     return reinterpret_cast<SDL_Surface*>(data)->w;
 }
