@@ -5,6 +5,7 @@
 #include <functional>
 #include <pic-gl/Util/lazy_delete_vector.hpp>
 #include <pic-gl/Util/tools.hpp>
+#include <pic-gl/Util/boxtools.hpp>
 
 using std::string;
 namespace picppgl{
@@ -13,23 +14,20 @@ class Level;
 class levelObject;
 class Level{
 public:
-    typedef std::function<bool()> winCondition;
     typedef std::function<void()> gcFun;
+    typedef std::vector<objinfo> boxcont;
 private:
     lazyDeleteVector<levelObject*> objects;
-    winCondition winfun;
-    point screencenter;
     std::vector<gcFun> gcFuns;
+    boxcont obstacles;
 public:
-    Level(winCondition wc):winfun(wc){}
-    void setWinFun(winCondition wc){winfun=wc;}
+    Level(){}
     void update(int);
     void addGcFun(gcFun f){gcFuns.push_back(f);}
+    void addObstacle(objinfo obj){obstacles.push_back(obj);}
+    boxcont getObstacles()const{return obstacles;}
     void addObj(levelObject*);
     void delObj(levelObject*);
-    bool hasWon();
-    void screenCenter(point nval){screencenter=nval;}
-    point screenCenter()const{return screencenter;}
     ~Level();
 };
 class levelObject{
