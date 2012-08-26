@@ -6,16 +6,12 @@
 #include <iostream>
 using namespace std;
 namespace ld24{
-Powerup::Powerup(Level *lvl, int x, int y, Powerup::Effect effect):
+Powerup::Powerup(Level *lvl, int x, int y, std::vector<Image> imgs, Powerup::Effect effect):
     levelObject(lvl),
     x(x),y(y),
+    images(imgs),
     r(this, mainwindow::powerups),
     ef(effect){
-        for (int i = 0; i < 24; ++i){
-            stringstream s;
-            s<<"resources/gfx/powerups/bite-anim"<<i<<".png";
-            images.emplace_back(Image(s.str(), 50, 50));
-        }
     powerups.add(this);
 }
 

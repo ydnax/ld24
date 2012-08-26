@@ -25,7 +25,7 @@ private:
     int chCount=0;
     Effect ef;
 public:
-    Powerup(Level *lvl, int x, int y, Effect effect);
+    Powerup(Level *lvl, int x, int y, std::vector<Image> imgs, Effect effect);
     virtual void draw(Image &target)override{
         auto img=images[imgIndex];
         target.apply(img, x, y);

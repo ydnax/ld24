@@ -3,6 +3,7 @@
 #include <fstream>
 #include <streambuf>
 #include <thread>
+#include <sstream>
 #include <pic-gl/Ui/main_window.hpp>
 #include <pic-gl/Gameflow/Level.hpp>
 #include <ld24/Objects/LevelLoader.hpp>
@@ -27,21 +28,24 @@ string lstr=
 R"LVL(ssssssssss
 ssssssssss
 sssssss
-ssssssss
-ssssswssss
-wwwwwwwwww)LVL";
+sssssssssswssw
+ssssswssswwwsw
+wwwwwwwwwwwwwwwww)LVL";
     Level level([](){return false;});
     auto ll=LevelLoader{&level, lstr};
     timer.start();
     Player player{&level, 50,50};
     player.setObstacles(ll.getBoxes());
-    new Powerup{&level, 200, 100, [](Player *pl){pl->up_walkspeed+=5000;} };
+    std::vector<Image> images;
+    for (int i = 0; i < 24; ++i){
+        stringstream s;
+        s<<"resources/gfx/powerups/higherjump-ani"<<i<<".png";
+        images.emplace_back(Image(s.str(), 50, 50));
+    }
+    new Powerup{&level, 200, 180, images, [](Player *pl){pl->up_canjump=true;} };
     while(! player.exit()){
         window->render();
         level.update(timer.get_dticks());
-        
-        std::chrono::milliseconds dura( 30 );
-        std::this_thread::sleep_for( dura );//*/
     }
     std::cout<<"all levels played. game over"<<std::endl;
 }
