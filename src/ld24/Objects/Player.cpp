@@ -71,6 +71,9 @@ void Player::update(int ticks){
         imgIndex=imgIndex%images.size();
     }
     checkPowerups();
+
+    auto img=images[imgIndex];
+    mwindow->ccx(xx+(img.w()/2));
 }
 
 bool Player::udChk(int ticks){
