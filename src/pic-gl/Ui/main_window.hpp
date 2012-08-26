@@ -18,9 +18,10 @@ class mainwindow{
     private:
         Image vsurface_;
         Image background;
+        Image world;
         vector<lazyDeleteVector<gfxobject*> >layers;
-        int h;
-        int w;
+        int h, w;
+        int ccx_, ccy_;
     public:
         enum layer{bg=0, boxes=1, powerups=2, player=3, __count=4};
         mainwindow(std::string bgpath, int h, int w, int bbp=32);
@@ -29,6 +30,9 @@ class mainwindow{
         void remLay(gfxobject* obj, const layer lay);
         void setBackground(Image newimg){background=newimg;}
         winInfo getInfo()const{return {h,w};}
+        void ccx(int nval){ccx_=nval;}
+        void ccy(int nval){ccy_=nval;}
+        void setWorldSize(int x, int y);
 };
 extern mainwindow *mwindow;
 }

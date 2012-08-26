@@ -7,10 +7,12 @@
 namespace picppgl{
 
 mainwindow::mainwindow(std::string bgpath, int w, int h, int bbp):
-        vsurface_(reinterpret_cast<ImageData*>(SDL_SetVideoMode(w, h, bbp, SDL_SWSURFACE ))),
+        vsurface_(reinterpret_cast<ImageData*>(SDL_SetVideoMode(w, h, bbp, SDL_HWSURFACE ))),
         background( bgpath, w, h),
+        world(1000,1000),
         layers(layer::__count),
-        h(h), w(w){
+        h(h), w(w),
+        ccx_(w/2), ccy_(h/2){
     SDL_Init( SDL_INIT_EVERYTHING );
     TTF_Init();
     SDL_WM_SetCaption( "fastgame", NULL );
@@ -18,15 +20,17 @@ mainwindow::mainwindow(std::string bgpath, int w, int h, int bbp):
 }
 
 void mainwindow::render(){
-    vsurface_.apply(background,0,0);
+    world.apply(background,ccx_-(background.w()/2),ccy_-(background.h()/2));
     for(auto &&layer: layers){
         layer.realDelete();
         for(auto &&obj: layer.data()){
-            obj->draw(vsurface_);
+            obj->draw(world);
         }
     }
+    auto dr=world.Copy(ccx_-(w/2),ccy_-(h/2), w, h);
+    vsurface_.apply(dr,0,0);
+    //dr.flip();
     vsurface_.flip();
-    //SDL_Flip(vsurface_.getSurface());
 }
 
 void mainwindow::remLay(gfxobject* obj, const layer lay){
