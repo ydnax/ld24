@@ -9,7 +9,7 @@ namespace picppgl{
 mainwindow::mainwindow(std::string bgpath, int w, int h, int bbp):
         vsurface_(reinterpret_cast<ImageData*>(SDL_SetVideoMode(w, h, bbp, SDL_HWSURFACE ))),
         background( bgpath, w, h),
-        world(1000,1000),
+        world(10000,1000),
         layers(layer::__count),
         h(h), w(w),
         ccx_(w/2), ccy_(h/2){
@@ -29,12 +29,19 @@ void mainwindow::render(){
     }
     auto dr=world.Copy(ccx_-(w/2),ccy_-(h/2), w, h);
     vsurface_.apply(dr,0,0);
-    //dr.flip();
     vsurface_.flip();
 }
 
 void mainwindow::remLay(gfxobject* obj, const layer lay){
     layers[lay].element_delete(obj);
+}
+
+void mainwindow::setWorldSizeW(int w){
+    world=Image{w, world.h()};
+}
+
+void mainwindow::setWorldSizeH(int h){
+    world=Image{world.w(), h};
 }
 
 mainwindow *mwindow=NULL;

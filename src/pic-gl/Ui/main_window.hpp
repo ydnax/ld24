@@ -32,7 +32,8 @@ class mainwindow{
         winInfo getInfo()const{return {h,w};}
         void ccx(int nval){ccx_=nval;}
         void ccy(int nval){ccy_=nval;}
-        void setWorldSize(int x, int y);
+        void setWorldSizeW(int w);
+        void setWorldSizeH(int h);
 };
 extern mainwindow *mwindow;
 }
