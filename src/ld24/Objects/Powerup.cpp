@@ -35,7 +35,6 @@ Powerup::Effect Powerup::Use(){
 }
 
 Powerup::~Powerup(){
-    //cerr<<"delete this "<<this<<endl;
     powerups.element_delete(this);
 }
 
