@@ -24,14 +24,14 @@ bool Player::exit(){
 
 void Player::update(int ticks){
     Uint8 *keystates = SDL_GetKeyState( NULL );
-    if( keystates[ SDLK_UP ] && canjump ){
-        yspeed+=-1*jumpspeed*ticks/1000.;
+    if( keystates[ SDLK_UP ] && onfloor && up_canjump){
+        yspeed+=-1*jumpspeed;
     }
     if( keystates[ SDLK_LEFT ] ){
-        xspeed =-1*(movespeed+up_walkspeed)*ticks/1000.;
+        xspeed =-1*(movespeed+up_walkspeed);
         chCount+=ticks;
     }else if( keystates[ SDLK_RIGHT ] ){
-        xspeed = (movespeed+up_walkspeed)*ticks/1000.;
+        xspeed = (movespeed+up_walkspeed);
         chCount+=ticks;
     }else{
         xspeed=0;
@@ -78,11 +78,11 @@ bool Player::udChk(int ticks){
     float ny=xy+yspeed*ticks/1000.;
     for(auto &&box:obstacles){
         if(boxCollide({{int(xx+0.5),int(ny+0.5)},img.w(), img.h()}, box)){
-            canjump=true;
+            onfloor=true;
             return true;
         }
     }
-    canjump=false;
+    onfloor=false;
     return false;
 }
 

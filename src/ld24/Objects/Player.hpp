@@ -24,12 +24,12 @@ private:
     int imgIndex=0;
     const int animationSpeed=100;
     int chCount=0;
-    bool canjump=false;
+    bool onfloor=false;
 
-    const int gravity=100;
-    const int jumpspeed=4000;
-    const int movespeed=1200;
-    const float maxdown=4000;
+    const int gravity=800;
+    const int jumpspeed=400;
+    const int movespeed=50;
+    const float maxdown=3000;
     bool udChk(int ticks);
     bool rlChk(int ticks);
     
