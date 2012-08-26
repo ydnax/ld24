@@ -81,7 +81,8 @@ bool Player::udChk(int ticks){
     float ny=xy+yspeed*ticks/1000.;
     for(auto &&box:obstacles){
         if(boxCollide({{int(xx+0.5),int(ny+0.5)},img.w(), img.h()}, box)){
-            onfloor=true;
+            if(yspeed>0)
+                onfloor=true;
             return true;
         }
     }
@@ -92,7 +93,7 @@ bool Player::udChk(int ticks){
 bool Player::rlChk(int ticks){
     auto img=images[imgIndex];
     float nx=xx+xspeed*ticks/1000.;
-    for(auto &&box:obstacles){
+    for(auto &&box: obstacles){
         if(boxCollide({{int(nx+0.5),int(xy+0.5)},img.w(), img.h()}, box)){
             return true;
         }
