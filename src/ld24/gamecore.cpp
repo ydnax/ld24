@@ -23,12 +23,15 @@ gamecore::gamecore(){
 }
     
 void gamecore::gameloop(){
-    timer.start();
     RealLevelLoader rll{};
-    auto levels=rll.parse("VERSION: 1\nwall 0,10 > 10 \nwall 10,9 > 9 \npowerup 9,9 jump 1\n");
+    ifstream t("levels.txt");
+    string str((istreambuf_iterator<char>(t)), istreambuf_iterator<char>());
+    auto levels=rll.parse(str);
     auto level=levels[0]();
     Player player{level, 50,50};
     player.setObstacles(level->getObstacles());
+    player.respawn();
+    timer.start();
     while(! player.exit()){
         window->render();
         level->update(timer.get_dticks());

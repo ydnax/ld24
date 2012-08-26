@@ -1,0 +1,6 @@
+VERSION: 1
+wall 0,10 > 10 
+wall 10,9 > 9 
+powerup 9,9 jump 1
+powerup 2,8 speed 50
+spawn 5,8

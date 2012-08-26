@@ -135,7 +135,11 @@ void RealLevelLoader::level_finish(){
 }
 
 void RealLevelLoader::spawn(){
-    cerr<<"spawn not implemented yet :("<<endl;
+    auto x=xcache*50;
+    auto y=ycache*50;
+    lcomps.push_back([=](Level *lvl){
+        lvl->Spawn({x,y});
+    });
 }
 void RealLevelLoader::finish(){
     cerr<<"finish not implemented yet :("<<endl;
@@ -176,6 +180,7 @@ void RealLevelLoader::powerup(){
     int x=xcache;
     int y=ycache;
     int strength=numcache;
+    auto powertype=this->powertype;
     lcomps.push_back([=](Level *lvl){
     std::vector<Image> images;
     std::function<void(Player*)> effect;

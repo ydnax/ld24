@@ -20,6 +20,7 @@ private:
     lazyDeleteVector<levelObject*> objects;
     std::vector<gcFun> gcFuns;
     boxcont obstacles;
+    point spawn={50,50};
 public:
     Level(){}
     void update(int);
@@ -28,6 +29,8 @@ public:
     boxcont getObstacles()const{return obstacles;}
     void addObj(levelObject*);
     void delObj(levelObject*);
+    void Spawn(point nval){spawn=nval;}
+    point Spawn(){return spawn;}
     ~Level();
 };
 class levelObject{

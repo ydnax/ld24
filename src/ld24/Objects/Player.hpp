@@ -40,6 +40,11 @@ public:
 public:
     Player(Level *lvl, int x, int y);
     bool exit();
+    void respawn(){
+        auto sp=lvl->Spawn();
+        xx=sp.x;
+        xy=sp.y;
+    }
     void setObstacles(boxcont nval){obstacles=nval;}
     virtual void draw(Image &target)override{
         auto img=images[imgIndex];
