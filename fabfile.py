@@ -1,8 +1,9 @@
-from fabric.api import local
+from fabric.api import local, settings
 def dev():
-    while True:
-        local('scons debug=1')
-        local('inotifywait -e MODIFY -r src SConstruct')
+    with settings(warn_only=True):
+        while True:
+            local('scons debug=1')
+            local('inotifywait -e MODIFY -r src SConstruct')
 
 def gits():
     while True:
