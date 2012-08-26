@@ -29,8 +29,8 @@ R"LVL(ssssssssss
 ssssssssss
 sssssss
 sssssssssswssw
-ssssswssswwwsw
-wwwwwwwwwwwwwwwww)LVL";
+ssssswssswwwswsssssssssswwsssssssswwwwwsswwswswswswwwwwwwssssss
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww)LVL";
     Level level([](){return false;});
     auto ll=LevelLoader{&level, lstr};
     timer.start();
