@@ -5,7 +5,7 @@
 #include <thread>
 #include <pic-gl/Ui/main_window.hpp>
 #include <pic-gl/Gameflow/Level.hpp>
-#include <ld24/LevelLoader.hpp>
+#include <ld24/Objects/LevelLoader.hpp>
 #include <ld24/Objects/Player.hpp>
 #include <ld24/Objects/Powerup.hpp>
 #include "gamecore.hpp"
@@ -16,13 +16,13 @@ using namespace ld24;
 namespace picppgl{
 //using namespace ld24;
 gamecore::gamecore(){
-    window=new mainwindow("resources/gfx/bg.png", 800, 600);
+    window=new mainwindow("resources/gfx/background/deepsea-tileable.jpg", 800, 600);
 
 }
     
 void gamecore::gameloop(){
 
-    auto ll=LevelLoader{};
+    
 string lstr=
 R"LVL(ssssssssss
 ssssssssss
@@ -30,13 +30,11 @@ sssssss
 ssssssss
 ssssswssss
 wwwwwwwwww)LVL";
-    auto li=ll.parseLevel(lstr);
-    auto limg=get<1>(li);
-    window->setBackground(limg);
     Level level([](){return false;});
+    auto ll=LevelLoader{&level, lstr};
     timer.start();
     Player player{&level, 50,50};
-    player.setObstacles(get<0>(li));
+    player.setObstacles(ll.getBoxes());
     new Powerup{&level, 200, 100, [](Player *pl){pl->up_walkspeed+=5000;} };
     while(! player.exit()){
         window->render();

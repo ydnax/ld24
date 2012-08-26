@@ -3,14 +3,12 @@
 namespace ld24{
 using namespace std;
 using namespace picppgl;
-LevelLoader::LevelLoader():
-        row(0), column(0), maxlength(-1),
-        levelmap(0,50),
+LevelLoader::LevelLoader(Level *lvl, string data):
+        levelObject(lvl),
+        r(this, mainwindow::boxes),
+        row(0), column(0),
         sky(50,50), 
-        wall("resources/gfx/tiles/bluegreenRaw.png",50,50){}
-
-
-LevelLoader::lvlInfo LevelLoader::parseLevel(string data){
+        wall("resources/gfx/tiles/bluegreenRaw.png",50,50){
     for(char c:data){
         switch(c){
             case '\n':newline();break;
@@ -19,32 +17,27 @@ LevelLoader::lvlInfo LevelLoader::parseLevel(string data){
             default:error();break;
         }
     }
-    return {obstacles, levelmap};
 }
+void LevelLoader::draw(Image& target){
+    for(auto &&el:tiles){
+        target.apply(el.img, el.x, el.y);
+    }
+}
+
 void LevelLoader::newline(){
     row++;
     column=0;
-    Image newi{levelmap.w(), levelmap.h()+tilelength};
-    newi.apply(levelmap,0,0);
-    levelmap=newi;
 }
+
 void LevelLoader::skytile(){
-    addtile(sky);
+    //tiles.push_back({sky, column*tilelength, row*tilelength});
     column++;
 }
+
 void LevelLoader::walltile(){
-    addtile(wall);
     obstacles.push_back({{column*tilelength, row*tilelength}, tilelength, tilelength});
+    tiles.push_back({wall, column*tilelength, row*tilelength});
     column++;
-}
-void LevelLoader::addtile(picppgl::Image tile){
-    if(maxlength<column){
-        maxlength=column;
-        Image newi{tilelength*(maxlength+1), levelmap.h()};
-        newi.apply(levelmap,0,0);
-        levelmap=newi;
-    }
-    levelmap.apply(tile, column*tilelength, row*tilelength);
 }
 
 void LevelLoader::error(){
