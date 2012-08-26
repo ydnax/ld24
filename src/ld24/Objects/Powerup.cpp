@@ -13,7 +13,7 @@ Powerup::Powerup(Level *lvl, int x, int y, Powerup::Effect effect):
     ef(effect){
         for (int i = 0; i < 24; ++i){
             stringstream s;
-            s<<"resources/gfx/bite-anim"<<i<<".png";
+            s<<"resources/gfx/powerups/bite-anim"<<i<<".png";
             images.emplace_back(Image(s.str(), 50, 50));
         }
     powerups.add(this);
@@ -29,10 +29,8 @@ void Powerup::update(int ticks){
 }
 
 Powerup::Effect Powerup::Use(){
-    cerr<<"USE this "<<this<<endl;
     auto ret=ef;
-    lvl->addGcFun([&](){delete this;});
-    //delete this;
+    lvl->addGcFun([&](){delete this;});//delay deletion to avoid crash in update loop
     return ret;
 }
 

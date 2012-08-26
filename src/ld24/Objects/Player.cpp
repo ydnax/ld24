@@ -6,9 +6,9 @@ namespace ld24{
 Player::Player(Level *lvl, int x, int y):
         levelObject(lvl),
         x(x),y(y),xx(x),xy(y),xspeed(0), yspeed(0),
-        images{{Image("resources/gfx/microbe_ani1_m.png", 100, 50),
-                Image("resources/gfx/microbe_ani2_m.png", 100, 50),
-                Image("resources/gfx/microbe_ani4_m.png", 100, 50)
+        images{{Image("resources/gfx/player/microbe_ani1_m.png", 100, 50),
+                Image("resources/gfx/player/microbe_ani2_m.png", 100, 50),
+                Image("resources/gfx/player/microbe_ani4_m.png", 100, 50)
         }},
         r(this, mainwindow::player){
 }

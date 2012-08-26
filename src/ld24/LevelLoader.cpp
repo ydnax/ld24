@@ -7,15 +7,15 @@ LevelLoader::LevelLoader():
         row(0), column(0), maxlength(-1),
         levelmap(0,50),
         sky(50,50), 
-        wall("resources/gfx/bluegreenRaw.png",50,50){}
+        wall("resources/gfx/tiles/bluegreenRaw.png",50,50){}
 
 
 LevelLoader::lvlInfo LevelLoader::parseLevel(string data){
     for(char c:data){
         switch(c){
             case '\n':newline();break;
-            case 'w':walltile();break;
-            case 's':skytile();break;
+            case 'w': walltile();break;
+            case 's': skytile();break;
             default:error();break;
         }
     }
