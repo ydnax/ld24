@@ -1,6 +1,25 @@
 VERSION: 1
-wall 0,10 > 10 
-wall 10,9 > 9 
-powerup 9,9 jump 1
-powerup 2,8 speed 50
-spawn 5,8
+-- command reference:
+-- directions: < > ^ v
+-- wall x,y direction length
+-- powerup types: speed, jump
+-- powerup x,y type value
+-- spawn x,y
+-- finish x,y
+
+
+--TESTLEVEL
+spawn 1, 5
+wall 0,8 > 20
+wall 0,7 > 5
+wall 7,6 > 4
+wall 13,7 > 5
+powerup 11, 7 jump 1
+powerup 5, 6 speed 30
+
+
+
+
+
+
+-- powerup 0, 6 speed 50
