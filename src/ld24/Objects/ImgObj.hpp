@@ -14,9 +14,9 @@ private:
     int x,y;
     Image img;
 public:
-    ImgObj(Level *lvl, int x, int y, Image i):
+    ImgObj(Level *lvl, int x, int y, Image i, mainwindow::layer lay):
         levelObject(lvl),
-        r(this, mainwindow::boxes),x(x),y(y), img(i){}
+        r(this, lay),x(x),y(y), img(i){}
 
     virtual void draw(Image &target)override{
         target.apply(img, x, y);
