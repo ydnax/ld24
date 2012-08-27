@@ -21,7 +21,7 @@ public:
     ~Image();
     void resize(int width, int height);
     void apply(Image &what, int x, int y);
-    Image Copy(int x, int y, int w, int h);
+    Image Copy(int x, int y, int w, int h)const;
     int w()const;
     int h()const;
     void flip();

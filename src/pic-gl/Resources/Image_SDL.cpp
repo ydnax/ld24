@@ -127,7 +127,7 @@ void Image::apply(Image &what, int x, int y){
         &offset ); 
 }
 
-Image Image::Copy(int x, int y, int w, int h){
+Image Image::Copy(int x, int y, int w, int h)const{
     SDL_Rect r;
     r.x=x;
     r.y=y;
