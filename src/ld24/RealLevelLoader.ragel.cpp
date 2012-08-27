@@ -160,7 +160,7 @@ void RealLevelLoader::wall(){
             int x=50*cx;
             int y=50*cy;
             //cout<<"new img x,y "<<x<<" "<<y<<endl;
-            new ImgObj(lvl, x, y, tile);
+            new ImgObj(lvl, x, y, tile, mainwindow::boxes);
             lvl->addObstacle({{x,y},50,50});
             switch(direction_){
                 default:cerr<<"direction undefined"<<endl;break;
