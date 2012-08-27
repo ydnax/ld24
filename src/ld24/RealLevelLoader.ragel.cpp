@@ -37,7 +37,7 @@ yvar    = number %yvar;
 pos     = xvar . ','.' '* . yvar;
 string  = '"'%str_start . any+$str_push :> '"'%str_end;
 
-dir = ('^'|'v'|'<'|'>')%set_dir;
+dir = ('^'|'v'|'<'|'>')$set_dir;
 
 version = ('VERSION:' . ' '  . number)%version_number;
 
@@ -105,7 +105,6 @@ void RealLevelLoader::setDirection(char c){
         case 'v':direction=down;break;
         case '<':direction=left;break;
         case '>':direction=right;break;
-        default:direction=right;cerr<<"invalid direction oO"<<endl;break;
     }
 }    
 
@@ -163,7 +162,6 @@ void RealLevelLoader::wall(){
             new ImgObj(lvl, x, y, tile, mainwindow::boxes);
             lvl->addObstacle({{x,y},50,50});
             switch(direction_){
-                default:cerr<<"direction undefined"<<endl;break;
                 case up     :cy--;break;
                 case down   :cy++;break;
                 case left   :cx--;break;
