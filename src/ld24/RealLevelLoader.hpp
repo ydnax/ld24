@@ -17,10 +17,10 @@ class RealLevelLoader{
     public:
         typedef std::vector<LvlFun> T_Levels;
 private:
-    enum t_dir{up, down, left, right, undefined}; 
+    enum t_dir{up, down, left, right}; 
     enum t_powerup{speed, jump};
-    t_dir direction=undefined;
-    t_powerup powertype;
+    t_dir direction=right;
+    t_powerup powertype=speed;
     std::stringstream nbuf;
     std::stringstream strbuf;
     int numcache;
