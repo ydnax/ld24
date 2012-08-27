@@ -25,7 +25,7 @@ private:
     std::stringstream strbuf;
     int numcache;
     int xcache, ycache;
-    int linecount=1;
+    int linecount=2;
     std::string strcache;
     lvlComponents lcomps;
     T_Levels lcache;
