@@ -16,6 +16,7 @@ wall 7,6 > 4
 wall 13,7 > 5
 powerup 11, 7 jump 1
 powerup 5, 6 speed 30
+spike 10, 5
 
 
 

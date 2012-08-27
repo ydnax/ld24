@@ -1,0 +1,2 @@
+colorToHorizontalImage: f5f695
+horizontalImageAt: 20%

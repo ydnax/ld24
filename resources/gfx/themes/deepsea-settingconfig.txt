@@ -1,0 +1,2 @@
+colorToHorizontalImage: #000000
+horizontalImageAt: 15%

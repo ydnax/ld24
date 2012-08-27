@@ -108,6 +108,7 @@ void Player::checkPowerups(){
     for(auto i : powerups.data()){
         if(boxCollide({{x,y},img.w(), img.h()}, i->getInfo())){
             i->Use()(this);
+            return;
         }
     }
 }

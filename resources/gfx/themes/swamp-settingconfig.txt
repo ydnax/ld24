@@ -1,0 +1,2 @@
+colorToHorizontalImage: #824f12
+horizontalImageAt: 40%

@@ -21,6 +21,7 @@ private:
     std::vector<gcFun> gcFuns;
     boxcont obstacles;
     point spawn={50,50};
+    objinfo finish;
 public:
     Level(){}
     void update(int);
@@ -31,6 +32,8 @@ public:
     void delObj(levelObject*);
     void Spawn(point nval){spawn=nval;}
     point Spawn(){return spawn;}
+    void Finish(objinfo nval){finish=nval;}
+    objinfo Ginish(){return finish;}
     ~Level();
 };
 class levelObject{

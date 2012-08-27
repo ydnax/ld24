@@ -172,7 +172,15 @@ void RealLevelLoader::wall(){
     });
 }
 void RealLevelLoader::spike(){
-    cerr<<"spike not implemented yet :("<<endl;
+    int x=xcache;
+    int y=ycache;
+    for (int i = 0; i < 100; ++i){
+    lcomps.push_back([=](Level *lvl){
+        std::vector<Image> images;
+        Image i{"resources/gfx/spike.png", 50, 50};
+        images.push_back(i);
+        new ld24::Powerup{lvl, x*50, y*50, images, [=](Player *p){p->respawn();}};
+    });}
 }
 void RealLevelLoader::powerup(){
     int x=xcache;
@@ -195,16 +203,10 @@ void RealLevelLoader::powerup(){
                 s<<"resources/gfx/powerups/higherjump-ani"<<i<<".png";
                 images.emplace_back(Image(s.str(), 50, 50));
             }
-            effect=[=](Player* pl){pl->up_canjump=strength;cerr<<"enable"<<endl;};
+            effect=[=](Player* pl){pl->up_canjump=strength;};
         }
-        cout<<"new powerup @"<<x<<" "<<y<<endl;
         new ld24::Powerup{lvl, x*50, y*50, images, effect};
     });
-
-
-
-    
-
 }
 void RealLevelLoader::pu_speed(){
     powertype=speed;
